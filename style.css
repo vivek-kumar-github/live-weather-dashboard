@@ -1,0 +1,209 @@
+/* Import the Poppins font from Google Fonts. We're importing multiple weights (400, 500, 700) */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
+/*
+  This is a modern CSS reset. It's a great starting point for any new project.
+  It ensures a more consistent baseline across different browsers.
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/*
+  Remove the default margin on the body and other elements. This gives us
+  full control over the spacing of our layout from the very edges of the viewport.
+*/
+body,
+h1,
+h2,
+p,
+form {
+    margin: 0;
+}
+
+/*
+  Make images easier to work with by making them block-level elements
+  and ensuring they don't exceed their container's width.
+*/
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+/*
+  Elements like <input> and <button> don't inherit font properties by default.
+  This rule makes them inherit the font from their parent, ensuring a consistent
+  look for text across the entire application.
+*/
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/*
+  The :root pseudo-class selects the root element of the document (the <html> tag).
+  This is the perfect place to declare global CSS variables that we can reuse
+  throughout our entire application.
+*/
+:root {
+    --color-primary-dark: #2c3e50;
+    --color-primary-light: #3498db;
+    --color-bg-main: #ecf0f1;
+    --color-bg-card: #ffffff;
+    --color-text-dark: #34495e;
+    --color-text-light: #ffffff;
+    --color-border: #bdc3c7;
+
+    /* Font Families */
+    --font-family-main: 'Poppins', sans-serif; /* Our primary font, with a fallback to a generic sans-serif */
+
+    /* Spacing & Borders */
+    --spacing-unit: 1rem; /* Base unit for margins, padding (e.g., 1rem, 1.5rem, 2rem) */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+}
+
+/*
+  Now, let's USE the variables we defined to set up some basic styles on the body.
+  This applies our chosen font and background color to the whole page.
+*/
+body {
+    font-family: var(--font-family-main);
+    background-color: var(--color-bg-main);
+    color: var(--color-text-dark);
+    line-height: 1.5;
+}
+
+header {
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-light);
+    /* Add some padding using our spacing variable for a spacious look.
+    This adds 1rem of space on top/bottom and 2rem on left/right. */
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+    text-align: center;
+}
+
+main {
+    /*We declare the <main> element a grid container. */
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: calc(var(--spacing-unit) * 2);
+    padding: calc(var(--spacing-unit) * 2);
+    max-width: 1200px;
+    margin-inline: auto;
+}
+
+.search-section input {
+    width: 100%;
+    padding: var(--spacing-unit);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/*
+  Style the input field when it's in the 'focus' state (i.e., when the user has clicked into it).
+  This is crucial for accessibility and user experience.
+*/
+.search-section input:focus {
+    outline: none;
+    border-color: var(--color-primary-light);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25); /* Add a subtle "glow" effect (box-shadow) for a modern feel. */
+}
+
+.search-section button {
+    width: 100%;
+    display: block;
+    margin-top: var(--spacing-unit);
+    padding: var(--spacing-unit);
+    background-color: var(--color-primary-light);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.search-section button:hover {
+    background-color: var(--color-primary-dark);
+}
+
+/*
+  Style the main container for the current weather display.
+  We want to give it a "card" look.
+*/
+.current-weather-section {
+    background-color: var(--color-bg-card);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border);
+    padding: calc(var(--spacing-unit) * 2);
+}
+
+/*
+  Style the main heading (city name and date) within the current weather card.
+  This should be the most prominent piece of text.
+*/
+.current-weather-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-unit);
+}
+
+.current-weather-section p {
+    font-size: 1.1rem;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.current-weather-section p:last-child {
+    margin-bottom: 0;
+}
+
+.forecast-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-unit);
+}
+
+/*
+  This is the container that will hold our 5 forecast cards.
+  We will use Flexbox to arrange the cards horizontally.
+*/
+.forecast-cards-container {
+    display: flex;
+    gap: var(--spacing-unit);
+}
+
+.forecast-card {
+    flex: 1;
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-unit);
+    text-align: center;
+}
+
+/*
+  Style the content INSIDE our future cards.
+  We are defining rules for the elements our JavaScript will create.
+*/
+.forecast-card h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.forecast-card .weather-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0.5rem auto;
+    background-color: #eee;
+}
+
+.forecast-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-dark);
+}
