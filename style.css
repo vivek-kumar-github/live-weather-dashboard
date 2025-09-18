@@ -231,3 +231,47 @@ main {
 .hidden {
     display: none;
 }
+
+.main-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.sidebar {
+    flex: 1;
+    min-width: 250px;
+}
+
+.weather-display {
+    flex: 3;
+}
+
+#history-section h2 {
+    margin-top: 1.5rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+#history-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.history-btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.history-btn:hover {
+    background-color: #e0e0e0;
+}
