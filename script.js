@@ -4,7 +4,6 @@ const searchInputEl = document.querySelector('#search-input')
 const loaderEl = document.querySelector('#loader');
 const errorContainerEl = document.querySelector('#error-container');
 const historyContainerEl = document.querySelector('#history-container');
-
 const currentWeatherEl = document.querySelector('#current-weather');
 const forecastSectionEl = document.querySelector('#forecast');
 const cityNameEl = document.querySelector('#city-name-date');
@@ -19,13 +18,12 @@ const windSpeedEl = document.querySelector('#wind-speed');
 const cloudsEl = document.querySelector('#clouds');
 const sunriseEl = document.querySelector('#sunrise');
 const sunsetEl = document.querySelector('#sunset');
-
 const forecastContainerEl = document.querySelector('#forecast-container');
 
 // Converts a UNIX timestamp to a readable time (e.g., "06:16 AM")
 function formatTime(timestamp) {
     const date = new Date(timestamp * 1000);
-    return date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+    return date.toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit', hour12: true});
 }
 
 // Capitalizes the first letter of each word in a string (e.g., "moderate rain")
@@ -145,6 +143,7 @@ function renderHistory() {
         historyContainerEl.append(historyBtn);
     }
 }
+
 function saveCityToHistory(city) {
     const historyString = localStorage.getItem('weatherHistory') || '[]';
     let history = JSON.parse(historyString);
@@ -158,7 +157,7 @@ function saveCityToHistory(city) {
 }
 
 //API Key
-const API_KEY = '5743a47209025420a4383bf8eb3a30ce';
+const API_KEY = 'API_KEY';
 
 async function fetchWeather(city) {
     clearUI();
@@ -225,13 +224,11 @@ async function fetchWeatherByCoords(lat, lon) {
         displayCurrentWeather(currentWeather);
         displayForecast(forecast.list);
         saveCityToHistory(currentWeather.name);
-    }
-    catch (error) {
+    } catch (error) {
         console.error('Failed to fetch weather data', error);
         errorContainerEl.textContent = 'Could not fetch weather for your location. Please try searching for a city manually.';
         errorContainerEl.classList.remove('hidden');
-    }
-    finally {
+    } finally {
         hideLoader();
     }
 }
