@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Weather Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -28,11 +29,55 @@
             <div id="loader" class="loader hidden">Loading...</div>
             <div id="error-container" class="error-message hidden" aria-live="polite"></div>
             <section id="current-weather" class="current-weather-section">
-                <h2 id="city-name-date">City Name (Date)</h2>
-                <div class="weather-data">
-                    <p id="temperature">Temperature: --</p>
-                    <p id="humidity">Humidity: --</p>
-                    <p id="wind-speed">Wind Speed: --</p>
+                <div class="current-weather-header">
+                    <div class="city-info">
+                        <img id="current-weather-icon" src="" alt="Weather icon">
+                        <div>
+                            <h2 id="city-name-date">City Name (Date)</h2>
+                            <p id="weather-description">--</p>
+                        </div>
+                    </div>
+                    <div class="current-temp">
+                        <p id="temperature">--°C</p>
+                        <p id="feels-like">Feels like: --°C</p>
+                    </div>
+                </div>
+
+                <div class="temp-range">
+                    <div class="detail-item">
+                        <span class="detail-label">Min Temp</span>
+                        <span id="temp-min" class="detail-value">--°C</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Max Temp</span>
+                        <span id="temp-max" class="detail-value">--°C</span>
+                    </div>
+                </div>
+
+                <div class="other-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Humidity</span>
+                        <span id="humidity" class="detail-value">--%</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Wind Speed</span>
+                        <span id="wind-speed" class="detail-value">-- m/s</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Cloudiness</span>
+                        <span id="clouds" class="detail-value">--%</span>
+                    </div>
+                </div>
+
+                <div id="sun-times" class="sun-times">
+                    <div class="sun-item">
+                        <span>Sunrise</span>
+                        <span id="sunrise">--:-- AM</span>
+                    </div>
+                    <div class="sun-item">
+                        <span>Sunset</span>
+                        <span id="sunset">--:-- PM</span>
+                    </div>
                 </div>
             </section>
 

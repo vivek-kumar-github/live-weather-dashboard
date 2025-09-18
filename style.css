@@ -88,15 +88,15 @@ header {
     text-align: center;
 }
 
-main {
-    /*We declare the <main> element a grid container. */
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: calc(var(--spacing-unit) * 2);
-    padding: calc(var(--spacing-unit) * 2);
-    max-width: 1200px;
-    margin-inline: auto;
-}
+/*main {*/
+/*    !*We declare the <main> element a grid container. *!*/
+/*    display: grid;*/
+/*    grid-template-columns: 300px 1fr;*/
+/*    gap: calc(var(--spacing-unit) * 2);*/
+/*    padding: calc(var(--spacing-unit) * 2);*/
+/*    max-width: 1200px;*/
+/*    margin-inline: auto;*/
+/*}*/
 
 .search-section input {
     width: 100%;
@@ -232,19 +232,36 @@ main {
     display: none;
 }
 
+/*.main-layout {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    gap: 2rem;*/
+/*}*/
+
+/*.sidebar {*/
+/*    flex: 1;*/
+/*    min-width: 250px;*/
+/*}*/
+
+/*.weather-display {*/
+/*    flex: 3;*/
+/*}*/
+
 .main-layout {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+    display: flex; /* This is the key property to create the column layout */
+    gap: 2rem; /* Adds space between the sidebar and the weather display */
+    max-width: 1200px; /* Sets a max width for your content */
+    margin-inline: auto; /* Centers the layout on wider screens */
+    padding: 2rem; /* Adds some padding around the content */
 }
 
 .sidebar {
-    flex: 1;
-    min-width: 250px;
+    flex-basis: 300px; /* Gives the sidebar a fixed initial width */
+    flex-shrink: 0; /* Prevents the sidebar from shrinking on smaller screens */
 }
 
 .weather-display {
-    flex: 3;
+    flex-grow: 1; /* Allows the weather display to take up all remaining space */
 }
 
 #history-section h2 {
@@ -274,4 +291,154 @@ main {
 
 .history-btn:hover {
     background-color: #e0e0e0;
+}
+
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 15px; /* Default is 16px, so this is a small reduction. */
+    }
+    .main-layout {
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+    .current-weather-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .current-temp {
+        text-align: left;
+        margin-top: 0.5rem;
+    }
+    .current-weather-section h2 {
+        font-size: 2rem;
+    }
+    .current-temp #temperature {
+        font-size: 2.25rem;
+    }
+    .forecast-card {
+        width: 80%;
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .main-layout {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    html {
+        font-size: 14px;
+    }
+    header h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+    body {
+        padding: 1rem;
+    }
+    .forecast-cards-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+.current-weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.city-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#current-weather-icon {
+    width: 75px;
+    height: 75px;
+    margin: 0;
+    padding: 0;
+}
+
+#weather-description {
+    text-transform: capitalize;
+    font-size: 1.1rem;
+    color: var(--color-text-dark);
+    margin: 0;
+}
+
+.current-temp {
+    text-align: right;
+}
+
+.current-temp #temperature {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.current-temp #feels-like {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.temp-range {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.temp-range .detail-item {
+    flex: 1; /* Makes Min and Max temp items equal width */
+}
+
+.other-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates a 3-column grid */
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.detail-item {
+    background-color: var(--color-bg-main);
+    padding: 0.75rem;
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+}
+
+.detail-label {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.detail-value {
+    font-weight: 500;
+}
+
+.sun-times {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+}
+
+.current-weather-section,
+.forecast-section,
+.forecast-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.current-weather-section.visible,
+.forecast-section.visible,
+.forecast-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
