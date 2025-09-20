@@ -88,16 +88,6 @@ header {
     text-align: center;
 }
 
-/*main {*/
-/*    !*We declare the <main> element a grid container. *!*/
-/*    display: grid;*/
-/*    grid-template-columns: 300px 1fr;*/
-/*    gap: calc(var(--spacing-unit) * 2);*/
-/*    padding: calc(var(--spacing-unit) * 2);*/
-/*    max-width: 1200px;*/
-/*    margin-inline: auto;*/
-/*}*/
-
 .search-section input {
     width: 100%;
     padding: var(--spacing-unit);
@@ -231,21 +221,6 @@ header {
 .hidden {
     display: none;
 }
-
-/*.main-layout {*/
-/*    display: flex;*/
-/*    flex-wrap: wrap;*/
-/*    gap: 2rem;*/
-/*}*/
-
-/*.sidebar {*/
-/*    flex: 1;*/
-/*    min-width: 250px;*/
-/*}*/
-
-/*.weather-display {*/
-/*    flex: 3;*/
-/*}*/
 
 .main-layout {
     display: flex; /* This is the key property to create the column layout */
