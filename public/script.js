@@ -156,46 +156,25 @@ function saveCityToHistory(city) {
     renderHistory();
 }
 
-//API Key
-const API_KEY = 'API_KEY';
-
 async function fetchWeather(city) {
     clearUI();
     showLoader();
     try {
-        const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
-        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`;
+        // Fetch from your own server, not OpenWeatherMap
+        const response = await fetch(`/api/weather/${city}`);
 
-        const responses = await Promise.all([
-            fetch(currentWeatherUrl),
-            fetch(forecastUrl)
-        ]);
-
-        for (const response of responses) {
-            if (!response.ok) {
-                // Check for specific error codes
-                if (response.status === 404) {
-                    throw new Error('City not found. Please check your spelling.');
-                } else if (response.status === 401) {
-                    throw new Error('Invalid API Key. Please contact the administrator.');
-                } else {
-                    throw new Error(`API error: ${response.statusText} (${response.status})`);
-                }
-            }
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'An unknown error occurred.');
         }
 
-        const [currentWeather, forecast] = await Promise.all(
-            responses.map(response => response.json())
-        );
+        const { currentWeather, forecast } = await response.json();
 
         displayCurrentWeather(currentWeather);
-
         displayForecast(forecast.list);
-
         saveCityToHistory(currentWeather.name);
-
     } catch (error) {
-        console.error('Failed to fetch weather data:', error);
+        console.error('Frontend Fetch Error:', error);
         errorContainerEl.textContent = error.message;
         errorContainerEl.classList.remove('hidden');
     } finally {
@@ -207,26 +186,22 @@ async function fetchWeatherByCoords(lat, lon) {
     clearUI();
     showLoader();
     try {
-        const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-        const responses = await Promise.all([
-            fetch(currentWeatherUrl),
-            fetch(forecastUrl),
-        ]);
-        for (const response of responses) {
-            if (!response.ok) {
-                throw new Error('Failed to fetch weather data by coordinates');
-            }
+        // Fetch from your own server's coordinate endpoint
+        const response = await fetch(`/api/weather/coords?lat=${lat}&lon=${lon}`);
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'An unknown error occurred.');
         }
-        const [currentWeather, forecast] = await Promise.all(
-            responses.map(response => response.json())
-        );
+
+        const { currentWeather, forecast } = await response.json();
+
         displayCurrentWeather(currentWeather);
         displayForecast(forecast.list);
         saveCityToHistory(currentWeather.name);
     } catch (error) {
-        console.error('Failed to fetch weather data', error);
-        errorContainerEl.textContent = 'Could not fetch weather for your location. Please try searching for a city manually.';
+        console.error('Frontend Coords Fetch Error:', error);
+        errorContainerEl.textContent = 'Could not fetch weather for your location. ' + error.message;
         errorContainerEl.classList.remove('hidden');
     } finally {
         hideLoader();
