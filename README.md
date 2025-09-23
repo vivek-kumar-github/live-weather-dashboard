@@ -46,7 +46,7 @@ This is a crucial step for accessing the weather API.
 
 * Create a new file in the root of the project named .env.  
 * Open the .env file and add your secret API key from [OpenWeatherMap](https://openweathermap.org/appid) in the following format:  
-  API\_KEY="your\_secret\_api\_key\_here"
+  API\_KEY=your\_secret\_api\_key\_here
 
 #### **4\. Start the Server**
 
