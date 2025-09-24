@@ -33,7 +33,7 @@ Open your terminal and clone this repository.
 
 git clone [https://github.com/vivek-kumar-github/live-weather-dashboard.git](https://github.com/vivek-kumar-github/live-weather-dashboard.git)
 
-cd weather-dashboard
+cd live-weather-dashboard
 
 #### **2\. Install Dependencies**
 
