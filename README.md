@@ -31,7 +31,7 @@ To run this project on your local machine, follow these simple steps:
 
 Open your terminal and clone this repository.
 
-git clone [https://github.com/vivek-kumar-github/weather-dashboard.git](https://github.com/vivek-kumar-github/live-weather-dashboard.git)
+git clone [https://github.com/vivek-kumar-github/live-weather-dashboard.git](https://github.com/vivek-kumar-github/live-weather-dashboard.git)
 
 cd weather-dashboard
 
