@@ -32,16 +32,27 @@ function capitalizeDescription(description) {
 }
 
 function clearUI() {
-    cityNameEl.textContent = '';
-    currentWeatherIconEl.style.display = 'none';
-    weatherDescriptionEl.textContent = '';
-    temperatureEl.textContent = '';
-    humidityEl.textContent = '';
-    windSpeedEl.textContent = '';
-    forecastContainerEl.innerHTML = '';
-    errorContainerEl.classList.add('hidden');
+    // Hide animations and clear error
     currentWeatherEl.classList.remove('visible');
     forecastSectionEl.classList.remove('visible');
+    errorContainerEl.classList.add('hidden');
+
+    // Reset all text content to default placeholders
+    cityNameEl.textContent = '--';
+    weatherDescriptionEl.textContent = '--';
+    currentWeatherIconEl.style.display = 'none'; // Hide icon
+    temperatureEl.textContent = '--°C';
+    feelsLikeEl.textContent = 'Feels like: --°C';
+    tempMinEl.textContent = '--°C';
+    tempMaxEl.textContent = '--°C';
+    humidityEl.textContent = '--%'; // Note: This now targets the span directly
+    windSpeedEl.textContent = '-- m/s'; // Note: This now targets the span directly
+    cloudsEl.textContent = '--%';
+    sunriseEl.textContent = '--:--';
+    sunsetEl.textContent = '--:--';
+
+    // Clear forecast cards
+    forecastContainerEl.innerHTML = '';
 }
 
 function showLoader() {
@@ -59,10 +70,10 @@ function displayCurrentWeather(data) {
     const iconCode = data.weather[0].icon;
     const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
-    // Set the icon's src and alt text for accessibility
+    // Set the icon's src and alt text
     currentWeatherIconEl.setAttribute('src', iconUrl);
     currentWeatherIconEl.setAttribute('alt', data.weather[0].description);
-    currentWeatherIconEl.style.display = 'block'; // Make the icon visible
+    currentWeatherIconEl.style.display = 'block';
 
     // Main Header Info
     cityNameEl.textContent = `${data.name} (${new Date().toLocaleDateString('en-IN')})`;
@@ -75,13 +86,17 @@ function displayCurrentWeather(data) {
     // Details Grid
     tempMinEl.textContent = `${Math.round(data.main.temp_min)}°C`;
     tempMaxEl.textContent = `${Math.round(data.main.temp_max)}°C`;
+    // --- CHANGE HERE: Removed "Humidity: " label ---
     humidityEl.textContent = `${data.main.humidity}%`;
+    // --- CHANGE HERE: Removed "Wind Speed: " label ---
     windSpeedEl.textContent = `${data.wind.speed} m/s`;
     cloudsEl.textContent = `${data.clouds.all}%`;
 
     // Sun Times
     sunriseEl.textContent = formatTime(data.sys.sunrise);
     sunsetEl.textContent = formatTime(data.sys.sunset);
+
+    // Trigger animation
     currentWeatherEl.classList.add('visible');
 }
 

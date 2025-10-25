@@ -82,8 +82,6 @@ body {
 header {
     background-color: var(--color-primary-dark);
     color: var(--color-text-light);
-    /* Add some padding using our spacing variable for a spacious look.
-    This adds 1rem of space on top/bottom and 2rem on left/right. */
     padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
     text-align: center;
 }
@@ -96,14 +94,10 @@ header {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-/*
-  Style the input field when it's in the 'focus' state (i.e., when the user has clicked into it).
-  This is crucial for accessibility and user experience.
-*/
 .search-section input:focus {
     outline: none;
     border-color: var(--color-primary-light);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25); /* Add a subtle "glow" effect (box-shadow) for a modern feel. */
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
 }
 
 .search-section button {
@@ -119,14 +113,11 @@ header {
     transition: background-color 0.15s ease-in-out;
 }
 
-.search-section button:hover {
+.search-section button:hover,
+.search-section button:focus-visible {
     background-color: var(--color-primary-dark);
 }
 
-/*
-  Style the main container for the current weather display.
-  We want to give it a "card" look.
-*/
 .current-weather-section {
     background-color: var(--color-bg-card);
     border-radius: var(--border-radius-md);
@@ -134,23 +125,10 @@ header {
     padding: calc(var(--spacing-unit) * 2);
 }
 
-/*
-  Style the main heading (city name and date) within the current weather card.
-  This should be the most prominent piece of text.
-*/
 .current-weather-section h2 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: var(--spacing-unit);
-}
-
-.current-weather-section p {
-    font-size: 1.1rem;
-    margin-bottom: calc(var(--spacing-unit) * 2);
-}
-
-.current-weather-section p:last-child {
-    margin-bottom: 0;
 }
 
 .forecast-section h2 {
@@ -159,10 +137,6 @@ header {
     margin-bottom: var(--spacing-unit);
 }
 
-/*
-  This is the container that will hold our 5 forecast cards.
-  We will use Flexbox to arrange the cards horizontally.
-*/
 .forecast-cards-container {
     display: flex;
     gap: var(--spacing-unit);
@@ -177,10 +151,6 @@ header {
     text-align: center;
 }
 
-/*
-  Style the content INSIDE our future cards.
-  We are defining rules for the elements our JavaScript will create.
-*/
 .forecast-card h3 {
     font-size: 1.1rem;
     font-weight: 500;
@@ -190,7 +160,6 @@ header {
     width: 50px;
     height: 50px;
     margin: 0.5rem auto;
-    background-color: #eee;
 }
 
 .forecast-card p {
@@ -223,20 +192,20 @@ header {
 }
 
 .main-layout {
-    display: flex; /* This is the key property to create the column layout */
-    gap: 2rem; /* Adds space between the sidebar and the weather display */
-    max-width: 1200px; /* Sets a max width for your content */
-    margin-inline: auto; /* Centers the layout on wider screens */
-    padding: 2rem; /* Adds some padding around the content */
+    display: flex;
+    gap: 2rem;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 2rem;
 }
 
 .sidebar {
-    flex-basis: 300px; /* Gives the sidebar a fixed initial width */
-    flex-shrink: 0; /* Prevents the sidebar from shrinking on smaller screens */
+    flex-basis: 300px;
+    flex-shrink: 0;
 }
 
 .weather-display {
-    flex-grow: 1; /* Allows the weather display to take up all remaining space */
+    flex-grow: 1;
 }
 
 #history-section h2 {
@@ -264,75 +233,25 @@ header {
     transition: background-color 0.2s ease-in-out;
 }
 
-.history-btn:hover {
+.history-btn:hover,
+.history-btn:focus-visible {
     background-color: #e0e0e0;
 }
 
-@media screen and (max-width: 768px) {
-    html {
-        font-size: 15px; /* Default is 16px, so this is a small reduction. */
-    }
-    .main-layout {
-        gap: 1.5rem;
-        padding: 1rem;
-    }
-    .current-weather-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-    .current-temp {
-        text-align: left;
-        margin-top: 0.5rem;
-    }
-    .current-weather-section h2 {
-        font-size: 2rem;
-    }
-    .current-temp #temperature {
-        font-size: 2.25rem;
-    }
-    .forecast-card {
-        width: 80%;
-        max-width: 300px;
-    }
+/* Screen reader only utility class */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
-@media screen and (max-width: 600px) {
-    .main-layout {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    html {
-        font-size: 14px;
-    }
-    header h1 {
-        font-size: 2rem;
-        text-align: center;
-    }
-    body {
-        padding: 1rem;
-    }
-    .forecast-cards-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-    .current-weather-section h2 {
-        font-size: 1.8rem;
-        word-break: break-word;
-    }
-    .other-details {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .sun-times {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    .other-details .detail-item:last-child:nth-child(odd) {
-        grid-column: span 2;
-    }
-}
+/* --- NEW STYLES FOR CURRENT WEATHER CARD --- */
 
 .current-weather-header {
     display: flex;
@@ -383,12 +302,12 @@ header {
 }
 
 .temp-range .detail-item {
-    flex: 1; /* Makes Min and Max temp items equal width */
+    flex: 1;
 }
 
 .other-details {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Creates a 3-column grid */
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     margin-bottom: 1.5rem;
 }
@@ -398,6 +317,10 @@ header {
     padding: 0.75rem;
     border-radius: var(--border-radius-sm);
     text-align: center;
+    /* This is the vertical alignment fix */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .detail-label {
@@ -418,6 +341,7 @@ header {
     padding-top: 1rem;
 }
 
+/* --- ANIMATION STYLES --- */
 .current-weather-section,
 .forecast-section,
 .forecast-card {
@@ -431,4 +355,101 @@ header {
 .forecast-card.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+
+/* This query targets tablets and small desktops */
+@media screen and (max-width: 900px) {
+    .main-layout {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+
+    .sidebar {
+        flex-basis: auto; /* Allow sidebar to shrink */
+    }
+}
+
+/* This query targets small phone screens */
+@media screen and (max-width: 600px) {
+    html {
+        font-size: 14px;
+    }
+
+    body {
+        padding: 0;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .main-layout {
+        gap: 1.5rem;
+        padding: 0.5rem;
+    }
+
+    .current-weather-section {
+        padding: 1rem;
+    }
+
+    /* Fixes the header (city, icon, temp) */
+    .current-weather-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .current-temp {
+        text-align: left;
+        margin-top: 0.5rem;
+    }
+
+    .current-weather-section h2 {
+        font-size: 1.8rem;
+        word-break: break-word; /* Fixes long city name overflow */
+    }
+
+    .current-temp #temperature {
+        font-size: 2.25rem;
+    }
+
+    /* Fixes the Min/Max Temp row */
+    .temp-range {
+        gap: 0.5rem;
+    }
+
+    /* Fixes the Humidity/Wind/Cloudiness grid */
+    .other-details {
+        grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
+        gap: 0.5rem;
+    }
+
+    /* Fixes the "Cloudiness" box */
+    .other-details .detail-item:last-child:nth-child(odd) {
+        grid-column: span 2; /* Makes the last item span the full width */
+    }
+
+    /* Fixes the Sunrise/Sunset text */
+    .sun-times {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* Fixes the 5-Day Forecast cards */
+    .forecast-cards-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .forecast-card {
+        width: 90%;
+        max-width: 400px;
+    }
 }

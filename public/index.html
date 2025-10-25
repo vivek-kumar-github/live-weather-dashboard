@@ -1,95 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Weather Dashboard</title>
+    <!-- Your favicon link would go here -->
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 <header>
     <h1>Live Weather Dashboard</h1>
 </header>
-<main>
-    <div class="main-layout">
-        <aside class="sidebar">
-            <section id="search-section" class="search-section">
-                <h2>Search for a city:</h2>
-                <form id="search-form">
-                    <input id="search-input" type="text" placeholder="e.g., New York">
-                    <button type="submit">Search</button>
-                </form>
-            </section>
-            <section id="history-section">
-                <h2>Search History</h2>
-                <div id="history-container"></div>
-            </section>
-        </aside>
-        <div class="weather-display">
-            <div id="loader" class="loader hidden">Loading...</div>
-            <div id="error-container" class="error-message hidden" aria-live="polite"></div>
-            <section id="current-weather" class="current-weather-section">
-                <div class="current-weather-header">
-                    <div class="city-info">
-                        <img id="current-weather-icon" src="" alt="Weather icon">
-                        <div>
-                            <h2 id="city-name-date">City Name (Date)</h2>
-                            <p id="weather-description">--</p>
-                        </div>
-                    </div>
-                    <div class="current-temp">
-                        <p id="temperature">--°C</p>
-                        <p id="feels-like">Feels like: --°C</p>
+<main class="main-layout">
+    <aside class="sidebar">
+        <section id="search-section" class="search-section">
+            <h2>Search for a city:</h2>
+            <form id="search-form">
+                <label for="search-input" class="sr-only">Search for a city:</label>
+                <input id="search-input" type="text" placeholder="e.g., New York">
+                <button type="submit">Search</button>
+            </form>
+        </section>
+        <section id="history-section">
+            <h2>Search History</h2>
+            <div id="history-container"></div>
+        </section>
+    </aside>
+
+    <div class="weather-display">
+        <div id="loader" class="loader hidden">Loading...</div>
+        <div id="error-container" class="error-message hidden" aria-live="polite"></div>
+
+        <!-- THIS IS THE NEW, CORRECTED CURRENT WEATHER SECTION -->
+        <section id="current-weather" class="current-weather-section">
+
+            <div class="current-weather-header">
+                <div class="city-info">
+                    <img id="current-weather-icon" src="" alt="Weather icon">
+                    <div>
+                        <h2 id="city-name-date">--</h2>
+                        <p id="weather-description">--</p>
                     </div>
                 </div>
-
-                <div class="temp-range">
-                    <div class="detail-item">
-                        <span class="detail-label">Min Temp</span>
-                        <span id="temp-min" class="detail-value">--°C</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Max Temp</span>
-                        <span id="temp-max" class="detail-value">--°C</span>
-                    </div>
+                <div class="current-temp">
+                    <p id="temperature">--°C</p>
+                    <p id="feels-like">Feels like: --°C</p>
                 </div>
+            </div>
 
-                <div class="other-details">
-                    <div class="detail-item">
-                        <span class="detail-label">Humidity</span>
-                        <span id="humidity" class="detail-value">--%</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Wind Speed</span>
-                        <span id="wind-speed" class="detail-value">-- m/s</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Cloudiness</span>
-                        <span id="clouds" class="detail-value">--%</span>
-                    </div>
+            <div class="temp-range">
+                <div class="detail-item">
+                    <span class="detail-label">Min Temp</span>
+                    <span id="temp-min" class="detail-value">--°C</span>
                 </div>
-
-                <div id="sun-times" class="sun-times">
-                    <div class="sun-item">
-                        <span>Sunrise</span>
-                        <span id="sunrise">--:-- AM</span>
-                    </div>
-                    <div class="sun-item">
-                        <span>Sunset</span>
-                        <span id="sunset">--:-- PM</span>
-                    </div>
+                <div class="detail-item">
+                    <span class="detail-label">Max Temp</span>
+                    <span id="temp-max" class="detail-value">--°C</span>
                 </div>
-            </section>
+            </div>
 
-            <section id="forecast" class="forecast-section">
-                <h2>5-Day Forecast</h2>
-                <div id="forecast-container" class="forecast-cards-container">
-
+            <div class="other-details">
+                <div class="detail-item">
+                    <span class="detail-label">Humidity</span>
+                    <span id="humidity" class="detail-value">--%</span>
                 </div>
-            </section>
-        </div>
+                <div class="detail-item">
+                    <span class="detail-label">Wind Speed</span>
+                    <span id="wind-speed" class="detail-value">-- m/s</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Cloudiness</span>
+                    <span id="clouds" class="detail-value">--%</span>
+                </div>
+            </div>
+
+            <div id="sun-times" class="sun-times">
+                <div class="sun-item">
+                    <span>Sunrise</span>
+                    <span id="sunrise">--:--</span>
+                </div>
+                <div class="sun-item">
+                    <span>Sunset</span>
+                    <span id="sunset">--:--</span>
+                </div>
+            </div>
+        </section>
+        <!-- END OF CURRENT WEATHER SECTION -->
+
+        <section id="forecast" class="forecast-section">
+            <h2>5-Day Forecast</h2>
+            <div id="forecast-container" class="forecast-cards-container">
+                <!-- Forecast cards will be injected here by JS -->
+            </div>
+        </section>
     </div>
 </main>
+
 <script src="script.js"></script>
 </body>
 </html>
